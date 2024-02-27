@@ -1,0 +1,44 @@
+/* External CSS for styling */
+.form-inline {
+  /* Your form styling here */
+}
+
+.link-no-underlin {
+  /* Your link styling here */
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.news-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.news-image {
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+  box-shadow: none;
+}
+
+.news-content {
+  flex: 1;
+}
+
+.news-title {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.news-description {
+  margin: 0;
+}
+
+.news-time {
+  margin: 0;
+  font-style: italic;
+}
