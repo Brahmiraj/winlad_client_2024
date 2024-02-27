@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import SearchField from "../../components/SearchField/SearchField";
 import ChoosePlane from "../../components/SubscribeCard/ChoosePlane";
 import BG from "../../assets/images/HomesideBg.png";
+import homeTopBg from "../../assets/images/homeTopBg.png";
 import { validateCurrentUser } from "../../utils/validateuser";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
@@ -70,14 +71,14 @@ function Subscription() {
   };
 
   useEffect(() => {
-    setLoading(true)
-    Promise.all([currentUserValidation(), getPlanes()]).then(() => {
-      setLoading(false);
-    }).catch((err) => {
-      setLoading(false);
-    })
-
-
+    setLoading(true);
+    Promise.all([currentUserValidation(), getPlanes()])
+      .then(() => {
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+      });
   }, [Refresh]);
 
   const logDetailsToDataLayer = () => {
@@ -157,7 +158,7 @@ function Subscription() {
     } finally {
       setUnsubModal(false);
       setRefresh((prev) => !prev);
-      window.location.reload()
+      window.location.reload();
     }
   };
 
@@ -205,7 +206,7 @@ function Subscription() {
       console.log(error);
       setLoading(false);
     }
-  }
+  };
 
   return (
     <>
@@ -214,9 +215,9 @@ function Subscription() {
         <div className="xl:flex xl:flex-row flex-col xl:justify-between px-4 special:px-12 2xl:px-8 flex-1 xl:gap-4 special:gap-8 2xl:gap-6 space-y-4 xl:space-y-0">
           {/* left side */}
           <img
-            src={BG}
+            src={homeTopBg}
             alt=""
-            className="absolute right-0 -z-10 top-40 w-72 xl:w-96 md:w-96 special:w-1/4 2xl:w-1/4 special:top-60 opacity-60 2xl:top-40"
+            className="absolute right-0 -z-10 top-0 left-60"
           />
           <div className="flex flex-col space-y-4 flex-1 special:space-y-8 2xl:space-y-6 relative">
             <div className="visible xl:hidden space-y-4">
@@ -235,7 +236,7 @@ function Subscription() {
             </div>
             {/* <SearchField /> */}
             <p className="font-bold text-xl special:text-4xl 2xl:text-2xl">
-              Choose Your Plan
+              Subscription
             </p>
             {loading ? (
               <div className="flex justify-center">
@@ -247,8 +248,9 @@ function Subscription() {
                   <button
                     type="button"
                     onClick={handleMonthly}
-                    className={`${isMonthly ? "bg-white text-black" : "bg-black text-white"
-                      } text-[10px] text-semibold xl:text-sm md:text-sm text-center special:py-4 special:text-xl 2xl:text-lg rounded-full py-2 flex-1`}
+                    className={`${
+                      isMonthly ? "bg-white text-black" : "bg-black text-white"
+                    } text-[10px] text-semibold xl:text-sm md:text-sm text-center special:py-4 special:text-xl 2xl:text-lg rounded-full py-2 flex-1`}
                   >
                     Monthly
                   </button>
@@ -256,8 +258,9 @@ function Subscription() {
                   <button
                     type="button"
                     onClick={handleQuatly}
-                    className={`${isQuartly ? "bg-white text-black" : "bg-black text-white"
-                      } text-[10px] text-semibold xl:text-sm md:text-sm text-center special:py-4 special:text-xl 2xl:text-lg rounded-full py-2 flex-1`}
+                    className={`${
+                      isQuartly ? "bg-white text-black" : "bg-black text-white"
+                    } text-[10px] text-semibold xl:text-sm md:text-sm text-center special:py-4 special:text-xl 2xl:text-lg rounded-full py-2 flex-1`}
                   >
                     Quartly (Save 10%)
                   </button>
@@ -265,15 +268,17 @@ function Subscription() {
                   <button
                     type="button"
                     onClick={handleYearly}
-                    className={`${isYearly ? "bg-white text-black" : "bg-black text-white"
-                      } text-[10px] text-semibold xl:text-sm md:text-sm text-center special:py-4 special:text-xl 2xl:text-lg rounded-full py-2 flex-1`}
+                    className={`${
+                      isYearly ? "bg-white text-black" : "bg-black text-white"
+                    } text-[10px] text-semibold xl:text-sm md:text-sm text-center special:py-4 special:text-xl 2xl:text-lg rounded-full py-2 flex-1`}
                   >
                     Yearly (Save 20%)
                   </button>
                 </div>
                 <div
-                  className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 special:gap-6 2xl:gap-4   ${choosePlane == "true ? bg-white/50"
-                    }`}
+                  className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 special:gap-6 2xl:gap-4   ${
+                    choosePlane == "true ? bg-white/50"
+                  }`}
                 >
                   {planes.map((plane, key) => (
                     <SubscribeCard
@@ -288,10 +293,10 @@ function Subscription() {
                         isYearly
                           ? plane.annualy
                           : "" | isQuartly
-                            ? plane.price_id_semiannual
-                            : "" | isMonthly
-                              ? plane.price_id
-                              : ""
+                          ? plane.price_id_semiannual
+                          : "" | isMonthly
+                          ? plane.price_id
+                          : ""
                       }
                       // descList={Array.isArray(plane.desc) ? plane.desc : []}
                       descList={Array.isArray(plane.desc) ? plane.desc : []}
@@ -301,14 +306,14 @@ function Subscription() {
                             ? plane.desc[2]
                             : []
                           : "" | isQuartly
-                            ? Array.isArray(plane.desc)
-                              ? plane.desc[1]
-                              : []
-                            : "" | isMonthly
-                              ? Array.isArray(plane.desc)
-                                ? plane.desc[0]
-                                : []
-                              : ""
+                          ? Array.isArray(plane.desc)
+                            ? plane.desc[1]
+                            : []
+                          : "" | isMonthly
+                          ? Array.isArray(plane.desc)
+                            ? plane.desc[0]
+                            : []
+                          : ""
                       }
                       desc1={plane.desc1}
                       desc2={plane.desc2}
@@ -319,30 +324,30 @@ function Subscription() {
                         plane.name == "Starter"
                           ? "[#808080]"
                           : "black" | (plane.name == "Boomer")
-                            ? "[#366B71]"
-                            : "black" | (plane.name == "Platinum")
-                              ? "white"
-                              : "black" | (plane.name == "Black")
-                                ? "black"
-                                : ""
+                          ? "[#366B71]"
+                          : "black" | (plane.name == "Platinum")
+                          ? "white"
+                          : "black" | (plane.name == "Black")
+                          ? "black"
+                          : ""
                       }
                       gradientFrom={
                         plane.name == "Bronz"
                           ? "from-red-400"
                           : "black" | (plane.name == "Silver")
-                            ? "from-gray-200"
-                            : "black" | (plane.name == "Gold")
-                              ? "from-[#FFDF37]"
-                              : ""
+                          ? "from-gray-200"
+                          : "black" | (plane.name == "Gold")
+                          ? "from-[#FFDF37]"
+                          : ""
                       }
                       gradientTo={
                         plane.name == "Bronz"
                           ? "to-white"
                           : "black" | (plane.name == "Silver")
-                            ? "to-white"
-                            : "black" | (plane.name == "Gold")
-                              ? "to-[#9D7C00]"
-                              : ""
+                          ? "to-white"
+                          : "black" | (plane.name == "Gold")
+                          ? "to-[#9D7C00]"
+                          : ""
                       }
                       textColor={plane.name == "Black" ? "white" : "black"}
                       cardBorderColor={
@@ -353,40 +358,40 @@ function Subscription() {
                         plane.name == "Starter"
                           ? "black"
                           : "" | (plane.name == "Boomer")
-                            ? "black"
-                            : "" | (plane.name == "Platinum")
-                              ? "black"
-                              : "" | (plane.name == "Gold")
-                                ? "black"
-                                : "" | (plane.name == "Black")
-                                  ? "white"
-                                  : ""
+                          ? "black"
+                          : "" | (plane.name == "Platinum")
+                          ? "black"
+                          : "" | (plane.name == "Gold")
+                          ? "black"
+                          : "" | (plane.name == "Black")
+                          ? "white"
+                          : ""
                       }
                       buttonText={
                         plane.name == "Starter"
                           ? "white"
                           : "" | (plane.name == "Boomer")
-                            ? "white"
-                            : "" | (plane.name == "Platinum")
-                              ? "white"
-                              : "" | (plane.name == "Gold")
-                                ? "white"
-                                : "" | (plane.name == "Black")
-                                  ? "black"
-                                  : ""
+                          ? "white"
+                          : "" | (plane.name == "Platinum")
+                          ? "white"
+                          : "" | (plane.name == "Gold")
+                          ? "white"
+                          : "" | (plane.name == "Black")
+                          ? "black"
+                          : ""
                       }
                       buttonHover={
                         plane.name == "Black"
                           ? "black"
                           : plane.name == "Starter"
-                            ? "white"
-                            : plane.name == "Gold"
-                              ? "white"
-                              : plane.name == "Black"
-                                ? "black"
-                                : plane.name == "Boomer"
-                                  ? "white"
-                                  : "white"
+                          ? "white"
+                          : plane.name == "Gold"
+                          ? "white"
+                          : plane.name == "Black"
+                          ? "black"
+                          : plane.name == "Boomer"
+                          ? "white"
+                          : "white"
                       }
                       buttonHoverText={
                         plane.name == "Black" ? "white" : "black"
@@ -398,10 +403,10 @@ function Subscription() {
                         isYearly
                           ? plane.raffle_count_annual
                           : "" | isQuartly
-                            ? plane.raffle_count_semiannual
-                            : "" | isMonthly
-                              ? plane.raffle_count
-                              : ""
+                          ? plane.raffle_count_semiannual
+                          : "" | isMonthly
+                          ? plane.raffle_count
+                          : ""
                       }
                       mPlanId={plane.subid}
                       qPlanId={plane.subidsemiannual}
@@ -411,18 +416,18 @@ function Subscription() {
                           isMonthly
                             ? plane.subid
                             : isQuartly
-                              ? plane.subidsemiannual
-                              : isYearly
-                                ? plane.subidannual
-                                : "",
+                            ? plane.subidsemiannual
+                            : isYearly
+                            ? plane.subidannual
+                            : "",
                           // plane.desc[0].slice(0, 1),
                           isMonthly
                             ? plane.monthly
                             : isQuartly
-                              ? plane.semiannualy
-                              : isYearly
-                                ? plane.annualy
-                                : "",
+                            ? plane.semiannualy
+                            : isYearly
+                            ? plane.annualy
+                            : "",
                           plane.name
                         )
                       }
@@ -430,8 +435,8 @@ function Subscription() {
                       showUnSubModal={handleShowUnsub}
                       trailUserTest={valUser.trial}
                       userSub={valUser?.subscription?.subid}
-                      handleRenew={()=>{
-                        setRenewModal(true)
+                      handleRenew={() => {
+                        setRenewModal(true);
                       }}
                     />
                   ))}
@@ -483,10 +488,11 @@ function Subscription() {
 
           {/* right-side */}
           <div className="flex-col flex-1 space-y-4 hidden xl:flex">
-            <div className=" space-y-4">
-              <div className="bg-black rounded-b-3xl py-4">
-                <TopNav textColor={"white"} />
-                <div className="pt-10">
+            <div className="space-y-8">
+              {/* <div className="bg-black rounded-b-3xl py-4"> */}
+              <div></div>
+              <TopNav textColor={"black"} />
+              {/* <div className="pt-10">
                   <motion.img
                     initial={{ x: 80, opacity: 0 }}
                     animate={{ x: 80, opacity: 1 }}
@@ -495,8 +501,8 @@ function Subscription() {
                     src={MainCar}
                     alt="main"
                   />
-                </div>
-              </div>
+                </div> */}
+              {/* </div> */}
               <div className="w-full">
                 <GoldCard />
               </div>
@@ -514,13 +520,19 @@ function Subscription() {
                   <IoCloseSharp />
                 </div>
                 <h6 className="xl:text-lg text-md font-bold mb-4">
-                  Confirm Cancellation<br />
-                  <span className="text-xs">If you confirm and end your subscription now, you can still have your subscription until<br /> {new Date(valUser.expireDate).toLocaleString("en-GB", {
-                    year: "numeric",
-                    month: "numeric",
-                    day: "numeric",
-                    timeZone: "UTC",
-                  })} </span>
+                  Confirm Cancellation
+                  <br />
+                  <span className="text-xs">
+                    If you confirm and end your subscription now, you can still
+                    have your subscription until
+                    <br />{" "}
+                    {new Date(valUser.expireDate).toLocaleString("en-GB", {
+                      year: "numeric",
+                      month: "numeric",
+                      day: "numeric",
+                      timeZone: "UTC",
+                    })}{" "}
+                  </span>
                 </h6>
                 <div className="flex items-center justify-center gap-2">
                   <button
@@ -551,13 +563,18 @@ function Subscription() {
                   <IoCloseSharp />
                 </div>
                 <h6 className="xl:text-lg text-md font-bold mb-4">
-                  Confirm Renew<br />
-                  <span className="text-xs">If you confirm and renew your subscription now, Your subscription will renew on <br /> {new Date(valUser.expireDate).toLocaleString('en-GB', {
-                    year: "numeric",
-                    month: "numeric",
-                    day: "numeric",
-                    timeZone: "UTC",
-                  })} </span>
+                  Confirm Renew
+                  <br />
+                  <span className="text-xs">
+                    If you confirm and renew your subscription now, Your
+                    subscription will renew on <br />{" "}
+                    {new Date(valUser.expireDate).toLocaleString("en-GB", {
+                      year: "numeric",
+                      month: "numeric",
+                      day: "numeric",
+                      timeZone: "UTC",
+                    })}{" "}
+                  </span>
                 </h6>
                 <div className="flex items-center justify-center gap-2">
                   <button
@@ -568,7 +585,7 @@ function Subscription() {
                   </button>
                   <button
                     className="px-5 py-1 rounded-xl bg-black hover:bg-white border-2 text-white hover:text-black"
-                    onClick={()=>handleRenew()}
+                    onClick={() => handleRenew()}
                   >
                     Confirm
                   </button>
