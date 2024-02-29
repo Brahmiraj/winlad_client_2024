@@ -51,23 +51,23 @@ const GoldCard = () => {
       {!loading &&
         (valUser?.subscription_status !== "noplan" ? (
           <div className="flex flex-col justify-center items-center">
-            <div className="top-card text-white rounded-t-lg flex justify-between items-center px-10 py-3 w-2/5">
+            <div className="top-card text-white rounded-t-lg flex justify-between items-center px-10 py-3 w-3/5">
               <h1>Earning Balance</h1>
               <h1 className="font-bold text-lg">$ 170.86</h1>
             </div>
             <div
-              className={`relative border border-solid ${
+              className={`relative  ${
                 valUser.subscriptionPlan?.data?.name == "Black"
                   ? "border-white"
                   : "border-black"
-              } overflow-hidden rounded-xl flex flex-row items-center justify-between cursor-default w-2/3`}
+              } overflow-hidden rounded-xl flex flex-row items-center justify-between cursor-default w-4/5 shadow-2xl`}
               // style={{ backgroundColor: valUser ? valUser.subscriptionPlan?.data?.color : "" }}
               style={{
                 background: `linear-gradient(308.06deg, #FFBE1D 37.31%, #FFDD89 98.03%)`,
               }}
             >
               {/* <div className="gold-card-inner-sec1"> */}
-              <div className="flex flex-col pl-4 py-4">
+              <div className="flex flex-col pl-4 py-4 ">
                 <span className="xl:text-4xl font-bold text-3xl 2xl:test-5xl special:text-7xl main-t">
                   {valUser?.startDate && (
                     <p
