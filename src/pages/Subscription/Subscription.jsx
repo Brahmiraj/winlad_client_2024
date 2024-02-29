@@ -23,6 +23,7 @@ import FreeEntryCardDashboard from "../../components/FreeEntry/FreeEntryCardDash
 import OutsideClickHandler from "react-outside-click-handler";
 import { toast } from "react-toastify";
 import { IoCloseSharp } from "react-icons/io5";
+import Vector from "../../assets/images/subcription/Vector.png";
 
 function Subscription() {
   const [planes, setPlanes] = useState([]);
@@ -210,15 +211,15 @@ function Subscription() {
 
   return (
     <>
-      <div className="flex relative min-h-screen w-full">
+      <div className="flex relative w-full">
         {/* home-content */}
         <div className="xl:flex xl:flex-row flex-col xl:justify-between px-4 special:px-12 2xl:px-8 flex-1 xl:gap-4 special:gap-8 2xl:gap-6 space-y-4 xl:space-y-0">
-          {/* left side */}
           <img
             src={homeTopBg}
             alt=""
             className="absolute right-0 -z-10 top-0 left-60"
           />
+          {/* left side */}
           <div className="flex flex-col space-y-4 flex-1 special:space-y-8 2xl:space-y-6 relative">
             <div className="visible xl:hidden space-y-4">
               <div className="bg-black rounded-b-3xl py-4">
@@ -238,221 +239,6 @@ function Subscription() {
             <p className="font-bold text-xl special:text-4xl 2xl:text-2xl">
               Subscription
             </p>
-            {loading ? (
-              <div className="flex justify-center">
-                <ItemLoader />
-              </div>
-            ) : planes.length > 0 ? (
-              <div className="flex flex-col space-y-4  pb-1">
-                <div className="flex flex-row justify-between bg-black items-center rounded-full px-1 py-1 special:py-2 special:px-2">
-                  <button
-                    type="button"
-                    onClick={handleMonthly}
-                    className={`${
-                      isMonthly ? "bg-white text-black" : "bg-black text-white"
-                    } text-[10px] text-semibold xl:text-sm md:text-sm text-center special:py-4 special:text-xl 2xl:text-lg rounded-full py-2 flex-1`}
-                  >
-                    Monthly
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={handleQuatly}
-                    className={`${
-                      isQuartly ? "bg-white text-black" : "bg-black text-white"
-                    } text-[10px] text-semibold xl:text-sm md:text-sm text-center special:py-4 special:text-xl 2xl:text-lg rounded-full py-2 flex-1`}
-                  >
-                    Quartly (Save 10%)
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={handleYearly}
-                    className={`${
-                      isYearly ? "bg-white text-black" : "bg-black text-white"
-                    } text-[10px] text-semibold xl:text-sm md:text-sm text-center special:py-4 special:text-xl 2xl:text-lg rounded-full py-2 flex-1`}
-                  >
-                    Yearly (Save 20%)
-                  </button>
-                </div>
-                <div
-                  className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 special:gap-6 2xl:gap-4   ${
-                    choosePlane == "true ? bg-white/50"
-                  }`}
-                >
-                  {planes.map((plane, key) => (
-                    <SubscribeCard
-                      key={key}
-                      id={plane._id}
-                      name={plane.name}
-                      year={isYearly}
-                      quartly={isQuartly}
-                      month={isMonthly}
-                      isPopular={plane.name == "Platinum" ? true : false}
-                      price={
-                        isYearly
-                          ? plane.annualy
-                          : "" | isQuartly
-                          ? plane.price_id_semiannual
-                          : "" | isMonthly
-                          ? plane.price_id
-                          : ""
-                      }
-                      // descList={Array.isArray(plane.desc) ? plane.desc : []}
-                      descList={Array.isArray(plane.desc) ? plane.desc : []}
-                      descL={
-                        isYearly
-                          ? Array.isArray(plane.desc)
-                            ? plane.desc[2]
-                            : []
-                          : "" | isQuartly
-                          ? Array.isArray(plane.desc)
-                            ? plane.desc[1]
-                            : []
-                          : "" | isMonthly
-                          ? Array.isArray(plane.desc)
-                            ? plane.desc[0]
-                            : []
-                          : ""
-                      }
-                      desc1={plane.desc1}
-                      desc2={plane.desc2}
-                      desc3={plane.desc3}
-                      color={plane.color}
-                      colorFrom={plane.colorFrom}
-                      bgColor={
-                        plane.name == "Starter"
-                          ? "[#808080]"
-                          : "black" | (plane.name == "Boomer")
-                          ? "[#366B71]"
-                          : "black" | (plane.name == "Platinum")
-                          ? "white"
-                          : "black" | (plane.name == "Black")
-                          ? "black"
-                          : ""
-                      }
-                      gradientFrom={
-                        plane.name == "Bronz"
-                          ? "from-red-400"
-                          : "black" | (plane.name == "Silver")
-                          ? "from-gray-200"
-                          : "black" | (plane.name == "Gold")
-                          ? "from-[#FFDF37]"
-                          : ""
-                      }
-                      gradientTo={
-                        plane.name == "Bronz"
-                          ? "to-white"
-                          : "black" | (plane.name == "Silver")
-                          ? "to-white"
-                          : "black" | (plane.name == "Gold")
-                          ? "to-[#9D7C00]"
-                          : ""
-                      }
-                      textColor={plane.name == "Black" ? "white" : "black"}
-                      cardBorderColor={
-                        plane.name == "Black" ? "black" : "black"
-                      }
-                      borderColor={plane.name == "white" ? "black" : "black"}
-                      buttonColor={
-                        plane.name == "Starter"
-                          ? "black"
-                          : "" | (plane.name == "Boomer")
-                          ? "black"
-                          : "" | (plane.name == "Platinum")
-                          ? "black"
-                          : "" | (plane.name == "Gold")
-                          ? "black"
-                          : "" | (plane.name == "Black")
-                          ? "white"
-                          : ""
-                      }
-                      buttonText={
-                        plane.name == "Starter"
-                          ? "white"
-                          : "" | (plane.name == "Boomer")
-                          ? "white"
-                          : "" | (plane.name == "Platinum")
-                          ? "white"
-                          : "" | (plane.name == "Gold")
-                          ? "white"
-                          : "" | (plane.name == "Black")
-                          ? "black"
-                          : ""
-                      }
-                      buttonHover={
-                        plane.name == "Black"
-                          ? "black"
-                          : plane.name == "Starter"
-                          ? "white"
-                          : plane.name == "Gold"
-                          ? "white"
-                          : plane.name == "Black"
-                          ? "black"
-                          : plane.name == "Boomer"
-                          ? "white"
-                          : "white"
-                      }
-                      buttonHoverText={
-                        plane.name == "Black" ? "white" : "black"
-                      }
-                      hoverButtonBorder={
-                        plane.name == "Black" ? "black" : "black"
-                      }
-                      raffleCount={
-                        isYearly
-                          ? plane.raffle_count_annual
-                          : "" | isQuartly
-                          ? plane.raffle_count_semiannual
-                          : "" | isMonthly
-                          ? plane.raffle_count
-                          : ""
-                      }
-                      mPlanId={plane.subid}
-                      qPlanId={plane.subidsemiannual}
-                      yPlanId={plane.subidannual}
-                      onButtonClick={() =>
-                        handleButton(
-                          isMonthly
-                            ? plane.subid
-                            : isQuartly
-                            ? plane.subidsemiannual
-                            : isYearly
-                            ? plane.subidannual
-                            : "",
-                          // plane.desc[0].slice(0, 1),
-                          isMonthly
-                            ? plane.monthly
-                            : isQuartly
-                            ? plane.semiannualy
-                            : isYearly
-                            ? plane.annualy
-                            : "",
-                          plane.name
-                        )
-                      }
-                      planeId={valUser.sub_id}
-                      showUnSubModal={handleShowUnsub}
-                      trailUserTest={valUser.trial}
-                      userSub={valUser?.subscription?.subid}
-                      handleRenew={() => {
-                        setRenewModal(true);
-                      }}
-                    />
-                  ))}
-                  {/* <div className=" flex justify-center items-center  ">
-                    <FreeEntryCardDashboard />
-                  </div> */}
-                </div>
-              </div>
-            ) : (
-              <div className="flex flex-col items-center space-y-2">
-                <MdOutlineDoNotDisturbOff className="w-12 h-12 2xl:w-16 2xl:h-16 special:w-24 special:h-24" />
-                <p className="font-bold text-2xl 2xl:text-4xl special:text-6xl">
-                  No More Subscriptions Plans
-                </p>
-              </div>
-            )}
 
             {/* absolute xl:left-60 left-0 right-0 top-60 bottom-0 flex */}
 
@@ -503,9 +289,6 @@ function Subscription() {
                   />
                 </div> */}
               {/* </div> */}
-              <div className="w-full">
-                <GoldCard />
-              </div>
             </div>
           </div>
         </div>
@@ -594,6 +377,246 @@ function Subscription() {
             </OutsideClickHandler>
           </div>
         )}
+      </div>
+      <div>
+        <div className="flex justify-center items-center">
+          <div className="pt-10 flex-1">
+            <motion.img
+              initial={{ x: 80, opacity: 0 }}
+              animate={{ x: 80, opacity: 1 }}
+              transition={{ type: "tween", duration: 1, delay: 1 }}
+              className="w-3/4"
+              src={MainCar}
+              alt="main"
+            />
+          </div>
+          <div className="w-full flex-1">
+            <GoldCard />
+          </div>
+        </div>
+        <div>
+          {loading ? (
+            <div className="flex justify-center">
+              <ItemLoader />
+            </div>
+          ) : planes.length > 0 ? (
+            <div className="flex flex-col space-y-4 pb-1 justify-center items-center">
+              <div className="flex flex-col">
+                <h1 className="text-5xl font-semibold">Choose Your Plan</h1>
+                <div className="self-end">
+                  <img
+                    src={Vector}
+                    alt="Vector"
+                    className="relative bottom-3 left-3"
+                  />
+                </div>
+              </div>
+              <div className="flex flex-row justify-between bg-[#f5f5f5] items-center rounded-full px-5 py-3 special:py-2 special:px-2 w-1/2 p-10">
+                <button
+                  type="button"
+                  onClick={handleMonthly}
+                  className={`${
+                    isMonthly ? "bg-black text-white" : ""
+                  } text-[10px] text-semibold xl:text-sm md:text-sm text-center special:py-4 special:text-xl 2xl:text-lg rounded-full py-2 flex-1`}
+                >
+                  Monthly
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleQuatly}
+                  className={`${
+                    isQuartly ? "bg-black text-white" : ""
+                  } text-[10px] text-semibold xl:text-sm md:text-sm text-center special:py-4 special:text-xl 2xl:text-lg rounded-full py-2 flex-1`}
+                >
+                  Quartly <span className="text-[#ee391c]">(Save 10%)</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleYearly}
+                  className={`${
+                    isYearly ? "bg-black text-white" : ""
+                  } text-[10px] text-semibold xl:text-sm md:text-sm text-center special:py-4 special:text-xl 2xl:text-lg rounded-full py-2 flex-1`}
+                >
+                  Yearly <span  className="text-[#ee391c]">(Save 20%)</span>
+                </button>
+              </div>
+              <div
+                className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 special:gap-6 2xl:gap-4 pt-10 ${
+                  choosePlane == "true ? bg-white/50"
+                }`}
+              >
+                {planes.map((plane, key) => (
+                  <SubscribeCard
+                    key={key}
+                    id={plane._id}
+                    name={plane.name}
+                    year={isYearly}
+                    quartly={isQuartly}
+                    month={isMonthly}
+                    isPopular={plane.name == "Platinum" ? true : false}
+                    price={
+                      isYearly
+                        ? plane.annualy
+                        : "" | isQuartly
+                        ? plane.price_id_semiannual
+                        : "" | isMonthly
+                        ? plane.price_id
+                        : ""
+                    }
+                    // descList={Array.isArray(plane.desc) ? plane.desc : []}
+                    descList={Array.isArray(plane.desc) ? plane.desc : []}
+                    descL={
+                      isYearly
+                        ? Array.isArray(plane.desc)
+                          ? plane.desc[2]
+                          : []
+                        : "" | isQuartly
+                        ? Array.isArray(plane.desc)
+                          ? plane.desc[1]
+                          : []
+                        : "" | isMonthly
+                        ? Array.isArray(plane.desc)
+                          ? plane.desc[0]
+                          : []
+                        : ""
+                    }
+                    desc1={plane.desc1}
+                    desc2={plane.desc2}
+                    desc3={plane.desc3}
+                    color={plane.color}
+                    colorFrom={plane.colorFrom}
+                    bgColor={
+                      plane.name == "Starter"
+                        ? "[#808080]"
+                        : "black" | (plane.name == "Boomer")
+                        ? "[#366B71]"
+                        : "black" | (plane.name == "Platinum")
+                        ? "white"
+                        : "black" | (plane.name == "Black")
+                        ? "black"
+                        : ""
+                    }
+                    gradientFrom={
+                      plane.name == "Bronz"
+                        ? "from-red-400"
+                        : "black" | (plane.name == "Silver")
+                        ? "from-gray-200"
+                        : "black" | (plane.name == "Gold")
+                        ? "from-[#FFDF37]"
+                        : ""
+                    }
+                    gradientTo={
+                      plane.name == "Bronz"
+                        ? "to-white"
+                        : "black" | (plane.name == "Silver")
+                        ? "to-white"
+                        : "black" | (plane.name == "Gold")
+                        ? "to-[#9D7C00]"
+                        : ""
+                    }
+                    textColor={plane.name == "Black" ? "white" : "black"}
+                    // cardBorderColor={plane.name == "Black" ? "black" : "black"}
+                    // borderColor={plane.name == "white" ? "black" : "black"}
+                    buttonColor={
+                      plane.name == "Starter"
+                        ? "black"
+                        : "" | (plane.name == "Boomer")
+                        ? "black"
+                        : "" | (plane.name == "Platinum")
+                        ? "black"
+                        : "" | (plane.name == "Gold")
+                        ? "black"
+                        : "" | (plane.name == "Black")
+                        ? "white"
+                        : ""
+                    }
+                    buttonText={
+                      plane.name == "Starter"
+                        ? "white"
+                        : "" | (plane.name == "Boomer")
+                        ? "white"
+                        : "" | (plane.name == "Platinum")
+                        ? "white"
+                        : "" | (plane.name == "Gold")
+                        ? "white"
+                        : "" | (plane.name == "Black")
+                        ? "black"
+                        : ""
+                    }
+                    buttonHover={
+                      plane.name == "Black"
+                        ? "black"
+                        : plane.name == "Starter"
+                        ? "white"
+                        : plane.name == "Gold"
+                        ? "white"
+                        : plane.name == "Black"
+                        ? "black"
+                        : plane.name == "Boomer"
+                        ? "white"
+                        : "white"
+                    }
+                    buttonHoverText={plane.name == "Black" ? "white" : "black"}
+                    hoverButtonBorder={
+                      plane.name == "Black" ? "black" : "black"
+                    }
+                    raffleCount={
+                      isYearly
+                        ? plane.raffle_count_annual
+                        : "" | isQuartly
+                        ? plane.raffle_count_semiannual
+                        : "" | isMonthly
+                        ? plane.raffle_count
+                        : ""
+                    }
+                    mPlanId={plane.subid}
+                    qPlanId={plane.subidsemiannual}
+                    yPlanId={plane.subidannual}
+                    onButtonClick={() =>
+                      handleButton(
+                        isMonthly
+                          ? plane.subid
+                          : isQuartly
+                          ? plane.subidsemiannual
+                          : isYearly
+                          ? plane.subidannual
+                          : "",
+                        // plane.desc[0].slice(0, 1),
+                        isMonthly
+                          ? plane.monthly
+                          : isQuartly
+                          ? plane.semiannualy
+                          : isYearly
+                          ? plane.annualy
+                          : "",
+                        plane.name
+                      )
+                    }
+                    planeId={valUser.sub_id}
+                    showUnSubModal={handleShowUnsub}
+                    trailUserTest={valUser.trial}
+                    userSub={valUser?.subscription?.subid}
+                    handleRenew={() => {
+                      setRenewModal(true);
+                    }}
+                  />
+                ))}
+                {/* <div className=" flex justify-center items-center  ">
+                    <FreeEntryCardDashboard />
+                  </div> */}
+              </div>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center space-y-2">
+              <MdOutlineDoNotDisturbOff className="w-12 h-12 2xl:w-16 2xl:h-16 special:w-24 special:h-24" />
+              <p className="font-bold text-2xl 2xl:text-4xl special:text-6xl">
+                No More Subscriptions Plans
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </>
   );

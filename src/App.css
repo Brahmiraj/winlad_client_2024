@@ -2,4 +2,6 @@
     line-height: 30px;
 }
 
-    
+.cardbgsub {
+    --tw-bg-opacity: 0.25;
+}
